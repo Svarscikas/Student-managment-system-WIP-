@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Lab2.Models.Course>
+
+@{
+    ViewBag.Title = "Mano kursai";
+}
+@using Lab2.Extensions
+
+<h2>Mano kursai</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Kurso pavadinimas
+        </th>
+        <th>
+            Kreditai
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Credits)
+    </td>
+
+    <td>
+        @Html.ActionLink("Peržiūrėti pažymius", "GetEnrollmentGrades", "Enrollment", new { id = item.CourseID, id2 = int.Parse(User.Identity.GetStudentID()) }, null) |
+    </td>
+</tr>
+}
+
+</table>

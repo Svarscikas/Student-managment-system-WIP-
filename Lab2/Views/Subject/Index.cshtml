@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Lab2.Models.Subject>
+
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Temos</h2>
+<br />
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary role="button">Pridėti naują temą</a>
+</p>
+
+    @foreach (var item in Model)
+    {
+        <div class="container">
+            <div class="row" style="background-color:cadetblue;border-left: 5px solid black">
+                <h2 style="padding-left:1em">@Html.DisplayFor(modelItem => item.Title)</h2>
+            </div>
+            <div class="row">
+                <p style="padding:20px 10px 20px 10px">@Html.DisplayFor(modelItem => item.Content)</p>
+            </div>
+            @Html.ActionLink("Redaguoti", "Edit", new { id = item.SubjectID }) |
+            @Html.ActionLink("Išsamiau", "Details", new { id = item.SubjectID }) |
+            @Html.ActionLink("Ištrinti", "Delete", new { id = item.SubjectID })
+        </div>
+      }

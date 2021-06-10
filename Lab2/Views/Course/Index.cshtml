@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Lab2.Models.Course>
+
+@{
+    ViewBag.Title = "Kursai";
+}
+<br />
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a href="@Url.Action("Create")" class="btn btn-primary role="button">Pridėti naują kursą</a>
+    </p>
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail" style="background-color:forestgreen">
+                <h2 class="text-center">@Html.DisplayFor(modelItem => item.Title)</h2>
+                <hr />
+                <p class="text-center">Kreditų sk: @Html.DisplayFor(modelItem => item.Credits)</p>
+                <p class="text-center">
+                    <a href="@Url.Action("CourseSubjects","Subject", new { id = item.CourseID })" class="btn btn-primary role="button">Atidaryti kursus</a>
+                    <a href="@Url.Action("Edit", new { id = item.CourseID })" class="btn btn-warning" role="button">Redaguoti</a>
+                    <a href="@Url.Action("Delete", new { id = item.CourseID })" class="btn btn-danger" role="button">Ištrinti</a>
+                </p>
+            </div>
+        </div>
+    }
+</div>

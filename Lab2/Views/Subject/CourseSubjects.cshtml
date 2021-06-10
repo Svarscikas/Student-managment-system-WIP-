@@ -1,0 +1,60 @@
+﻿@model Lab2.Models.CourseStudentsViewModel
+
+@{
+    ViewBag.Title = "Course Subjects";
+}
+
+<br />
+
+@foreach (var item in Model.Subjects)
+{
+    <div class="container">
+        <div class="row" style="background-color:cadetblue;border-left: 5px solid black">
+            <h2 style="padding-left:1em">@Html.DisplayFor(modelItem => item.Title)</h2>
+        </div>
+        <div class="row">
+            <p style="padding:20px 10px 20px 10px">@Html.DisplayFor(modelItem => item.Content)</p>
+        </div>
+        <a href="@Url.Action("Edit", new { id = item.SubjectID })" class="btn btn-primary" role="button">Redaguoti</a>
+        <a href="@Url.Action("Delete", new { id = item.SubjectID })" class="btn btn-danger" role="button">Ištrinti</a>
+    </div>
+    <br />
+}
+@if (User.IsInRole("Admin"))
+{
+    <a href="@Url.Action("Create")" style="float:right" class="btn btn-warning role="button">Pridėti naują temą</a>
+}
+
+
+@if (Model.Students.Count != 0 && User.IsInRole("Admin"))
+{
+    <h2>Studentai esantys šiame modulyje</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Vardas</th>
+                <th>Pavardė</th>
+                <th>Registracijos data</th>
+                <th>Veiksmai</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Students)
+            {
+                <tr>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>@item.EnrollmentDate</td>
+                    <td><a href="@Url.Action("Create","")" class="btn btn-primary" role="button">Redaguoti</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@if (Model.Students.Count == 0)
+{
+    <h2>Kol kas studentų šiame kurse nėra</h2>
+}
+
+

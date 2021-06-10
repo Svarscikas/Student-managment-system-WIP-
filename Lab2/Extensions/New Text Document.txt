@@ -1,0 +1,13 @@
+public ActionResult GetEnrollmentGrades(int? id, int? id2)
+        {
+            List<Grade> grades = new List<Grade>();
+
+            var selectedCourse = db.Courses.Where(x => x.CourseID == id).FirstOrDefault();
+            foreach(Enrollment enrollment in selectedCourse.Enrollments)
+            {
+                if (enrollment.StudentID == id2)
+                {
+                }
+            }
+            return View(grades);
+        }
